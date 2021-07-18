@@ -1,3 +1,56 @@
+// works
+#include <string>
+
+using namespace std;
+
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        string final = "";
+        
+        for (int i; i < s.size(); i++) {
+            string prevSubstrOdd = "";
+            string prevSubstrEven = "";
+            string newSubstr = "";
+            int offset = 0;
+            while (i - offset >= 0 && i + offset < s.size()) {
+                newSubstr = s.substr(i - offset, offset*2 + 1);
+                if(newSubstr.front() == newSubstr.back()) {
+                    prevSubstrOdd = newSubstr;
+                }
+                else {
+                    break;
+                }
+                offset++;
+            }
+            
+            newSubstr = "";
+            offset = 0;
+            while (i - offset >= 0 && i + 1 + offset < s.size()) {
+                newSubstr = s.substr(i - offset, offset*2 + 2);
+                if(newSubstr.front() == newSubstr.back()) {
+                    prevSubstrEven = newSubstr;
+                }
+                else {
+                    break;
+                }
+                offset++;
+            }
+            
+            if (prevSubstrOdd.size() > prevSubstrEven.size()) {
+                if (prevSubstrOdd.size() > final.size()) {
+                    final = prevSubstrOdd;
+                }
+            }
+            else {
+                if (prevSubstrEven.size() > final.size()) {
+                    final = prevSubstrEven;
+                }
+            }
+        }
+        return final;
+    }
+};
 // v3
 #include <string>
 
