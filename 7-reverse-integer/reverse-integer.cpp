@@ -14,7 +14,7 @@ public:
             y *= -1;
         }
         if (y == 0) {
-            remainders.push_back(0);
+            return 0;
         }
         while (y >= 1) {
             remainder = y % 10;
@@ -32,6 +32,15 @@ public:
             }
         }
 
-        
+
+        vector<int> max = {2, 1, 4, 7, 4, 8, 3, 6, 4, 7};
+        vector<int> min = {2, 1, 4, 7, 4, 8, 3, 6, 4, 8};
+        int i = 0;
+        int count = 0;
+        if (remainders.size() == 10) {
+            for (auto it = remainders.rbegin(); it != remainders.rend(); it++) {
+                
+            }
+        }
     }
 };
