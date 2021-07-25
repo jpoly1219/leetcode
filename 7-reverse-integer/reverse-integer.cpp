@@ -1,25 +1,22 @@
-#include <string>
-#include <vector>
+#include <cmath>
 
 using namespace std;
 
 class Solution {
 public:
     int reverse(int x) {
-        int remainder = 0;
-        vector<int> remainders;
+        int ans = 0;
 
-        int y = x;
-        if (y < 0) {
-            y *= -1;
+        while (x) {
+            int remainder = x % 10;
+            if (abs(ans) > 214748364 || (abs(ans) == 214748364 && ((x > 0 && remainder > 7) || (x < 0 && remainder < -8)))) {
+                return 0;
+            }
+            ans = ans*10 + remainder;
+            x /= 10;
         }
-        if (y == 0) {
-            return 0;
-        }
-        while (y >= 1) {
-            remainder = y % 10;
-            remainders.push_back(remainder);
-            y /= 10;
-        }
+        return ans;
     }
 };
+
+// -2147483648 to 2147483647
