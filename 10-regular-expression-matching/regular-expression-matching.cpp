@@ -17,16 +17,16 @@ if (s == p && "* or . doesn't exist at all") {
 
 // we can have two indices: one for s and the other for p
 
-while (indexP == p.end() && indexS == s.end()) {
+while (indexP != p.end() && indexS != s.end()) {
     // indexP moves first, and if there is no * or ., indexS moves.
     if (* exists at indexP) {
-        if (indexP == p.begin()) {
-            return false;
-        }
 
         // get character at indexP-1 and indexS;
+        // * is guaranteed to have a character to repeat, aka will never be at p.begin();
         char pBefore = p.at(indexP-1);
         char sCurr = p.at(indexS);
+
+        // if pBefore == ., skip and move on;
 
         // if equal, keep incrementing indexS until different character is found;
         char sNew = '';
@@ -51,11 +51,17 @@ while (indexP == p.end() && indexS == s.end()) {
         }
     }
 
-    if (. exists at indexP) {
-
+    else if (. exists at indexP) {
+        // if previous substring of p matches the previous substring of s, return true;
+        if (p.substring(0, indexP) == s.substring(0, indexP)) {
+            return true;
+        }
     }
+
     else {
-        return false;
+        if (indexS != s.begin()) {
+            indexS++;
+        }
     }
 
     indexP++;
